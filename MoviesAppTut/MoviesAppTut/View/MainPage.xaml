@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MoviesAppTut"
+             x:Class="MoviesAppTut.MainPage">
+
+    <StackLayout>
+          <Label Text="Movies" HorizontalOptions="Center" VerticalOptions="Center"/>
+          <SearchBar Placeholder="Search for a movie..." x:Name="searchBar" IsVisible="False"/>
+          <ActivityIndicator IsRunning="True" />
+          <ListView x:Name="listView" HasUnevenRows="True">
+               <ListView.ItemTemplate>
+                    <DataTemplate>
+                         <ViewCell>
+                              <StackLayout Orientation="Horizontal">
+                                   <Image Source="{Binding ImageSource}" />
+                                   <StackLayout>
+                                        <Label Text="{Binding Name}" FontSize="Medium" />
+                                        <Label Text="{Binding ReleaseYear}" FontSize="Small" />
+                                   </StackLayout>
+                              </StackLayout>
+                         </ViewCell>
+                    </DataTemplate>
+               </ListView.ItemTemplate>
+          </ListView>
+     </StackLayout>
+
+</ContentPage>
