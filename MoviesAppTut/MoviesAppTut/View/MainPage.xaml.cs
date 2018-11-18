@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoviesAppTut.Models;
+using MoviesAppTut.View;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,13 +10,6 @@ using Xamarin.Forms;
 
 namespace MoviesAppTut
 {
-	 public class MovieInfo
-	 {
-		  public string ImageSource { get; set; }
-		  public string Name { get; set; }
-		  public string ReleaseYear { get; set; }
-	 }
-
 	 public partial class MainPage : ContentPage
 	 {
 
@@ -23,20 +18,21 @@ namespace MoviesAppTut
 			   InitializeComponent();
 
 			   listView.ItemsSource = new List<MovieInfo> {
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test", ReleaseYear="1999"},
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test1", ReleaseYear="1994"},
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test2", ReleaseYear="1993"},
+					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test", ReleaseYear="1999", Description="This is a test not a movie." },
+					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test1", ReleaseYear="1994", Description="This is a test not a movie."},
+					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test2", ReleaseYear="1993", Description="This is a test not a movie."},
 			   };
 		  }
 
-		  private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		  private async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		  {
-			   Debug.WriteLine("selected");
-		  }
+			   var selectMovieInfo = e.SelectedItem as MovieInfo;
 
-		  private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
-		  {
-			   Debug.WriteLine("tapped");
+			   if (selectMovieInfo != null)
+			   {
+					await Navigation.PushAsync(new MovieInfoDetailPage(selectMovieInfo));
+					listView.SelectedItem = null;
+			   }
 		  }
 	 }
 }

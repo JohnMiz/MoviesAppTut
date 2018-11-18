@@ -12,7 +12,7 @@
           <ActivityIndicator />
           <Frame Padding="10">
                <ListView x:Name="listView" HasUnevenRows="True" SeparatorColor="Black"
-                         ItemSelected="listView_ItemSelected" ItemTapped="listView_ItemTapped">
+                         ItemSelected="listView_ItemSelected">
                     <ListView.ItemTemplate>
                          <DataTemplate>
                               <ViewCell>
