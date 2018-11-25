@@ -1,4 +1,5 @@
 ﻿using MoviesAppTut.Models;
+using MoviesAppTut.Services;
 using MoviesAppTut.View;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,7 @@ using Xamarin.Forms;
 namespace MoviesAppTut
 {
 	 public partial class MainPage : ContentPage
-	 {
-
+	 { 
 		  public MainPage()
 		  {
 			   InitializeComponent();
