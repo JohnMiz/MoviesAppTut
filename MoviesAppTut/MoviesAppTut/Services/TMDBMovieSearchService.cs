@@ -14,7 +14,7 @@ namespace MoviesAppTut.Services
 		  {
 			   using (HttpClient client = new HttpClient())
 			   {
-					string TMDB_API_KEY = "9e0af93752541dce467ef630230b6b05";
+					string TMDB_API_KEY = "YOUR_API_KEY";
 					string URL = $"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={query}";
 
 					HttpResponseMessage response = await client.GetAsync(new Uri(URL));
