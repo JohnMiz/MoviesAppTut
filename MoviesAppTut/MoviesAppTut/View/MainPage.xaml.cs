@@ -12,16 +12,18 @@ using Xamarin.Forms;
 namespace MoviesAppTut
 {
 	 public partial class MainPage : ContentPage
-	 { 
+	 {
+		  private IMovieSearchDataService movieSearchDataService;
+
 		  public MainPage()
 		  {
 			   InitializeComponent();
 
-			   listView.ItemsSource = new List<MovieInfo> {
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test", ReleaseYear="1999", Description="This is a test not a movie." },
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test1", ReleaseYear="1994", Description="This is a test not a movie."},
-					new MovieInfo{ ImageSource = "https://picsum.photos/50/50", Name ="Test2", ReleaseYear="1993", Description="This is a test not a movie."},
-			   };
+			   movieSearchDataService = new TMDBMovieSearchService();
+
+			   
+
+			   
 		  }
 
 		  private async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -32,6 +34,33 @@ namespace MoviesAppTut
 			   {
 					await Navigation.PushAsync(new MovieInfoDetailPage(selectMovieInfo));
 					listView.SelectedItem = null;
+			   }
+		  }
+
+		  private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+		  {
+			   var query = e.NewTextValue as string;
+
+			   if(!string.IsNullOrEmpty(query))
+			   {
+					if(query.Length >= 4)
+					{
+						 loader.IsRunning = true;
+
+						 var movies = await movieSearchDataService.GetMovieSearch(query);
+
+						 if(movies.Count == 0)
+						 {
+							  searchBar.Text = "";
+							  loader.IsRunning = false;
+							  await DisplayAlert("Message", "Couldn't find movie.", "OK", "Cancel");
+							  return;
+						 }
+
+						 listView.ItemsSource = movies;
+
+						 loader.IsRunning = false;
+					}
 			   }
 		  }
 	 }

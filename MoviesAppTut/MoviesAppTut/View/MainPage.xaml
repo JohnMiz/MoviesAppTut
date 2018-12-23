@@ -8,8 +8,8 @@
           <Label Text="Movies" Font="Bold" HorizontalOptions="Center" FontSize="Large" 
                  Margin="0, 10"/>
          
-          <SearchBar Placeholder="Search for a movie..." x:Name="searchBar" HeightRequest="30"/>
-          <ActivityIndicator />
+          <SearchBar Placeholder="Search for a movie..." x:Name="searchBar" HeightRequest="30" TextChanged="searchBar_TextChanged" />
+          <ActivityIndicator x:Name="loader" />
           <Frame Padding="10">
                <ListView x:Name="listView" HasUnevenRows="True" SeparatorColor="Black"
                          ItemSelected="listView_ItemSelected">
